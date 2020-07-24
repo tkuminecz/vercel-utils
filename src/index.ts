@@ -51,7 +51,8 @@ export const getCanonicalUrl = async (
 export const redirectToCanonicalUrl = async (
   ctx: DocumentContext,
   vercelUrl: string,
-  apiToken: string
+  apiToken: string,
+  useHttps?: boolean
 ): Promise<void> => {
   if (vercelUrl && apiToken && ctx.req) {
     // we are server-side and have the necessary params
@@ -59,7 +60,7 @@ export const redirectToCanonicalUrl = async (
     const canonicalHost = await getCanonicalHost(vercelUrl, apiToken);
     if (currentHost !== canonicalHost) {
       // we're not on the canonical url, redirect
-      const destUrl = `${getBaseUrl(canonicalHost)}${ctx.req.url}`;
+      const destUrl = `${getBaseUrl(canonicalHost, useHttps)}${ctx.req.url}`;
       // eslint-disable-next-line no-console
       console.warn(
         `Not at canonical url (${currentHost}), redirecting to ${destUrl}`
