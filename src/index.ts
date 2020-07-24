@@ -5,30 +5,28 @@ export const getCanonicalHost = async (
   vercelUrl: string,
   apiToken: string
 ): Promise<string> => {
-  if (!apiToken) throw new Error('No Vercel API token provided!');
-
-  // fetch deployment info
-  const res = await fetch(
-    `https://api.vercel.com/v11/now/deployments/get?url=${vercelUrl}`,
-    {
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-      },
-    }
-  );
-
-  if (res.ok) {
-    const deployInfo = await res.json();
-    // eslint-disable-next-line no-console
-    console.info('deployment info', deployInfo);
-    const [firstAlias] = deployInfo?.alias || [];
-    if (firstAlias) return firstAlias;
-  } else {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `Problem fetching deployment info for url ${vercelUrl}: ` +
-        `API returned HTTP ${res.status} ${res.statusText}`
+  if (apiToken) {
+    // fetch deployment info
+    const res = await fetch(
+      `https://api.vercel.com/v11/now/deployments/get?url=${vercelUrl}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+        },
+      }
     );
+
+    if (res.ok) {
+      const deployInfo = await res.json();
+      const [firstAlias] = deployInfo?.alias || [];
+      if (firstAlias) return firstAlias;
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Problem fetching deployment info for url ${vercelUrl}: ` +
+          `API returned HTTP ${res.status} ${res.statusText}`
+      );
+    }
   }
 
   // we couldn't find an alias, just use the given Vercel URL
