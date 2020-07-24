@@ -5,6 +5,8 @@ export const getCanonicalHost = async (
   vercelUrl: string,
   apiToken: string
 ): Promise<string> => {
+  if (!apiToken) throw new Error('No Vercel API token provided!');
+
   // fetch deployment info
   const res = await fetch(
     `https://api.vercel.com/v11/now/deployments/get?url=${vercelUrl}`,
@@ -14,6 +16,7 @@ export const getCanonicalHost = async (
       },
     }
   );
+
   if (res.ok) {
     const deployInfo = await res.json();
     // eslint-disable-next-line no-console
@@ -27,7 +30,8 @@ export const getCanonicalHost = async (
         `API returned HTTP ${res.status} ${res.statusText}`
     );
   }
-  // we couldn't find an alias, just use CURRENT_URL
+
+  // we couldn't find an alias, just use the given Vercel URL
   return vercelUrl;
 };
 
@@ -50,12 +54,13 @@ export const getCanonicalUrl = async (
 
 export const redirectToCanonicalUrl = async (
   ctx: DocumentContext,
-  vercelUrl: string,
-  apiToken: string,
+  vercelUrl?: string,
+  apiToken?: string,
   useHttps?: boolean
 ): Promise<void> => {
+  // only attempt to redirect to canonical URL if we have
+  // a Vercel URL, a Vercel API token and we're server-side
   if (vercelUrl && apiToken && ctx.req) {
-    // we are server-side and have the necessary params
     const currentHost = ctx.req.headers.host;
     const canonicalHost = await getCanonicalHost(vercelUrl, apiToken);
     if (currentHost !== canonicalHost) {
