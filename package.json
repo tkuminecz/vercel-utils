@@ -1,6 +1,6 @@
 {
   "name": "@tkuminecz/vercel-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Utilities for building apps on the Vercel platform",
   "repository": "git@github.com:tkuminecz/vercel-utils.git",
   "author": "Tim Kuminecz <tkuminecz@gmail.com>",
