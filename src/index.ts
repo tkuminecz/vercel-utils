@@ -16,6 +16,8 @@ export const getCanonicalHost = async (
   );
   if (res.ok) {
     const deployInfo = await res.json();
+    // eslint-disable-next-line no-console
+    console.info('deployment info', deployInfo);
     const [firstAlias] = deployInfo?.alias || [];
     if (firstAlias) return firstAlias;
   } else {
