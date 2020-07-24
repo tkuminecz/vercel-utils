@@ -44,8 +44,8 @@ export const redirectToCanonicalUrl = async (
   vercelUrl: string,
   apiToken: string
 ): Promise<void> => {
-  if (ctx.req) {
-    // we are server-side
+  if (vercelUrl && apiToken && ctx.req) {
+    // we are server-side and have the necessary params
     const currentHost = ctx.req.headers.host;
     const canonicalHost = await getCanonicalHost(vercelUrl, apiToken);
     if (currentHost !== canonicalHost) {
