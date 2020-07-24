@@ -18,6 +18,12 @@ export const getCanonicalHost = async (
     const deployInfo = await res.json();
     const [firstAlias] = deployInfo?.alias || [];
     if (firstAlias) return firstAlias;
+  } else {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `Problem fetching deployment info for url ${vercelUrl}: ` +
+        `API returned HTTP ${res.status} ${res.statusText}`
+    );
   }
   // we couldn't find an alias, just use CURRENT_URL
   return vercelUrl;
