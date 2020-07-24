@@ -39,6 +39,15 @@ export const getBaseUrl = (
   return `${protocol}${canonicalHost}`;
 };
 
+export const getCanonicalUrl = async (
+  baseUrl: string,
+  apiToken: string,
+  useHttps?: boolean
+): Promise<string> => {
+  const canonicalHost = await getCanonicalHost(baseUrl, apiToken);
+  return getBaseUrl(canonicalHost, useHttps);
+};
+
 export const redirectToCanonicalUrl = async (
   ctx: DocumentContext,
   vercelUrl: string,
