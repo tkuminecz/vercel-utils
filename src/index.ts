@@ -1,5 +1,10 @@
 import 'isomorphic-unfetch';
-import { DocumentContext } from 'next/document';
+import { IncomingMessage, ServerResponse } from 'http';
+
+interface DocumentContext {
+  req: IncomingMessage;
+  res: ServerResponse;
+}
 
 export const getCanonicalHost = async (
   vercelUrl: string,

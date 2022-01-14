@@ -1,6 +1,21 @@
 const path = require('path');
 
 module.exports = {
+  extends: ['typescript', 'typescript/prettier'],
+  plugins: ['jest'],
+  env: {
+    es6: true,
+    node: true,
+  },
+  rules: {
+    'no-console': ['error', { allow: ['error'] }],
+    'prettier/prettier': ['error', { singleQuote: true, arrowParens: 'avoid' }],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
+  },
+};
+
+/*
+module.exports = {
   // So parent files don't get applied
   root: true,
   globals: {
@@ -74,3 +89,4 @@ module.exports = {
     'max-classes-per-file': 'off'
   },
 };
+*/
