@@ -1,5 +1,5 @@
-import "isomorphic-unfetch"
-import { IncomingMessage, ServerResponse } from "http"
+import 'isomorphic-unfetch'
+import { IncomingMessage, ServerResponse } from 'http'
 
 interface DocumentContext {
   req: IncomingMessage
@@ -42,7 +42,7 @@ export const getBaseUrl = (
   canonicalHost: string,
   useHttps?: boolean
 ): string => {
-  const protocol = useHttps ? "https://" : "http://"
+  const protocol = useHttps ? 'https://' : 'http://'
   return `${protocol}${canonicalHost}`
 }
 

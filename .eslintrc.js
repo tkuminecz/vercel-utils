@@ -1,11 +1,11 @@
-"use strict"
+'use strict'
 
 module.exports = {
   extends: [
-    "@tkuminecz/eslint-config/typescript",
-    "@tkuminecz/eslint-config/prettier",
+    '@tkuminecz/eslint-config/typescript',
+    '@tkuminecz/eslint-config/prettier',
   ],
-  plugins: ["jest"],
+  plugins: ['jest'],
   env: {
     es6: true,
     node: true,

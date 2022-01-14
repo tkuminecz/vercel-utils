@@ -23,7 +23,7 @@
   },
   "prettier": "@tkuminecz/eslint-config/prettier.config",
   "devDependencies": {
-    "@tkuminecz/eslint-config": "~1.0.0",
+    "@tkuminecz/eslint-config": "~1.2.1",
     "@types/node": "~16.11.19",
     "@typescript-eslint/eslint-plugin": "~5.9.1",
     "@typescript-eslint/parser": "~5.9.1",
